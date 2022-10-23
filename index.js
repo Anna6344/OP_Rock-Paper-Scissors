@@ -10,46 +10,39 @@ function getPlayerSelection() {
   return playerSelection;
 }
 
-console.log(getComputerChoice());
-console.log(getPlayerSelection());
+function playRound() {
+  let compSel = getComputerChoice();
+  let playSel = getPlayerSelection();
+  let str;
+  if (
+    (playSel.toLowerCase() === 'rock') && (compSel.toLowerCase() === 'paper') ||
+    (playSel.toLowerCase() === 'paper') && (compSel.toLowerCase() === 'scissors') ||
+    (playSel.toLowerCase() === 'scissors') && (compSel.toLowerCase() === 'rock')
+    ) {
+      str = `You lose! ${compSel} beats ${playSel}`;
+      return str;
+    } else if (playSel.toLowerCase() === compSel.toLowerCase()) {
+      str = `Nobody won! ${compSel} is the same as ${playSel}`;
+      return str; 
+    } else {
+      str = `You won! ${playSel} beats ${compSel}`;
+      return str;
+    }
+}
 
-// function playRound() {
-//   let computerSelection = getComputerChoice();
-//   console.log(computerSelection);
-//   let playerSelection = getPlayerSelection();
-//   console.log(playerSelection);
-//   let str;
-//   if (
-//     playerSelection.toLowerCase === 'rock' && computerSelection.toLowerCase === 'paper' ||
-//     playerSelection.toLowerCase === 'paper' && computerSelection.toLowerCase === 'scissors' ||
-//     playerSelection.toLowerCase === 'scissors' && computerSelection.toLowerCase === 'rock'
-//     ){
-//       str = `You lose!`;
-//       return str;
-//     } else if (
-//       playerSelection === computerSelection
-//       ){
-//       str = 'Nobody won';
-//       return str; 
-//       } else {
-//       str = `You won!`;
-//       return str;
-//       }
-//     console.log(str);
-// }
+function game() {
+  let scoreComputer = 0;
+  let scorePlayer = 0;
+  for (let i = 0; i < 5; i++) {
+    let roundResult = playRound();
+    console.log(roundResult);
+    if (roundResult.startsWith(`You lose!`) === true) {
+      scoreComputer++;
+    }  else if (roundResult.startsWith(`You won!`) === true) {
+      scorePlayer++;
+    }}
+  let result = `Computer: ${scoreComputer} Player: ${scorePlayer}`;
+  return result;
+}
 
-// function game() {
-//   let scoreComputer = 0;
-//   let scorePlayer = 0;
-//   for (let i = 0; i < 5; i++) {
-//     playRound();
-//     if (playRound() === 'You lose!') {
-//       scoreComputer++;
-//     }  else if (playRound() === `You won!`){
-//       scorePlayer++;
-//     }}
-//   let result = `Computer: ${scoreComputer} Player: ${scorePlayer}`;
-//   return result;
-// }
-
-// console.log(game());
+console.log(game());
