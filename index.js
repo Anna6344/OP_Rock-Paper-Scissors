@@ -42,6 +42,13 @@ function game() {
       scorePlayer++;
     }}
   let result = `Computer: ${scoreComputer} Player: ${scorePlayer}`;
+  if(scoreComputer > scorePlayer) {
+    console.log("You lose!")
+  } else if (scorePlayer > scoreComputer) {
+    console.log("You won!")
+  } else {
+    console.log("Everybody won!")
+  }
   return result;
 }
 
