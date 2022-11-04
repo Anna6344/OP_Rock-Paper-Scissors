@@ -1,55 +1,83 @@
+let str = '',
+    scoreComputer = 0,
+    scorePlayer = 0,
+    rounds = 0;
+const scores = document.querySelector('#scores');
+const scoreC = document.createElement('div');
+scoreC.classList.add('scoreComputer');
+const scoreP = document.createElement('div');
+scoreP.classList.add('scorePlayer');
+const dbldot = document.createElement('div');
+dbldot.classList.add('dbldot');
+scoreC.textContent = `${scoreComputer}`;
+dbldot.textContent = ':'
+scoreP.textContent = `${scorePlayer}`;
+const result = document.querySelector('#result');
+const resScore = document.createElement('p');
+resScore.classList.add('resScore');
+let resText;
+
 function getComputerChoice() {
   let ranNum = Math.floor(Math.random() * 3);
-  const choices = ['Rock', 'Paper', 'Scissors'];
+  const choices = ['rock', 'paper', 'scissors'];
   let computerSelection = choices[ranNum];
   return computerSelection;
-}
+};
 
-function getPlayerSelection() {
-  let playerSelection = prompt('Enter your choice');
-  return playerSelection;
-}
-
-function playRound() {
+function playRound(e) {
   let compSel = getComputerChoice();
-  let playSel = getPlayerSelection();
+  let playSel = e.target.id;
+  console.log(playSel);
   let str;
   if (
-    (playSel.toLowerCase() === 'rock') && (compSel.toLowerCase() === 'paper') ||
-    (playSel.toLowerCase() === 'paper') && (compSel.toLowerCase() === 'scissors') ||
-    (playSel.toLowerCase() === 'scissors') && (compSel.toLowerCase() === 'rock')
+    (playSel === 'rock') && (compSel === 'paper') ||
+    (playSel === 'paper') && (compSel === 'scissors') ||
+    (playSel === 'scissors') && (compSel === 'rock')
     ) {
       str = `You lose! ${compSel} beats ${playSel}`;
-      return str;
-    } else if (playSel.toLowerCase() === compSel.toLowerCase()) {
+      scoreComputer++;
+    } else if (playSel === compSel) {
       str = `Nobody won! ${compSel} is the same as ${playSel}`;
-      return str; 
     } else {
       str = `You won! ${playSel} beats ${compSel}`;
-      return str;
-    }
-}
-
-function game() {
-  let scoreComputer = 0;
-  let scorePlayer = 0;
-  for (let i = 0; i < 5; i++) {
-    let roundResult = playRound();
-    console.log(roundResult);
-    if (roundResult.startsWith(`You lose!`) === true) {
-      scoreComputer++;
-    }  else if (roundResult.startsWith(`You won!`) === true) {
       scorePlayer++;
-    }}
-  let result = `Computer: ${scoreComputer} Player: ${scorePlayer}`;
-  if(scoreComputer > scorePlayer) {
-    console.log("You lose!")
-  } else if (scorePlayer > scoreComputer) {
-    console.log("You won!")
+    };
+  rounds++;
+  if (rounds === 1){
+    scores.appendChild(scoreP);
+    scores.appendChild(dbldot);
+    scores.appendChild(scoreC);
+    scoreC.textContent = `${scoreComputer}`;
+    scoreP.textContent = `${scorePlayer}`;
+    console.log(str);
+    console.log(rounds);
+  } else if (rounds > 1 && rounds < 5) {
+    console.log(str);
+    console.log(rounds);
+    scoreC.textContent = `${scoreComputer}`;
+    scoreP.textContent = `${scorePlayer}`;
   } else {
-    console.log("Everybody won!")
-  }
-  return result;
-}
+    scoreC.textContent = `${scoreComputer}`;
+    scoreP.textContent = `${scorePlayer}`;
+    console.log(`Comp: ${scoreComputer} Player: ${scorePlayer}`);
+    if (scoreComputer > scorePlayer) {
+      resText = 'Computer won!';
+    } else if (scorePlayer > scoreComputer) {
+      resText = 'You won!';
+    } else {
+      resText = 'Friendship won!';
+    }
+    resScore.textContent = `${resText}`;
+    result.appendChild(resScore); 
+    scorePlayer = 0,
+    scoreComputer = 0,
+    rounds = 0;
+  };
+};
 
-console.log(game());
+
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+  button.addEventListener('click', playRound);
+});
