@@ -7,11 +7,8 @@ const scoreC = document.createElement('div');
 scoreC.classList.add('scoreComputer');
 const scoreP = document.createElement('div');
 scoreP.classList.add('scorePlayer');
-const dbldot = document.createElement('div');
-dbldot.classList.add('dbldot');
-scoreC.textContent = `${scoreComputer}`;
-dbldot.textContent = ':'
-scoreP.textContent = `${scorePlayer}`;
+scoreC.textContent = `Computer: ${scoreComputer}`;
+scoreP.textContent = `Player: ${scorePlayer}`;
 const result = document.querySelector('#result');
 const resScore = document.createElement('p');
 resScore.classList.add('resScore');
@@ -27,7 +24,6 @@ function getComputerChoice() {
 function playRound(e) {
   let compSel = getComputerChoice();
   let playSel = e.target.id;
-  console.log(playSel);
   let str;
   if (
     (playSel === 'rock') && (compSel === 'paper') ||
@@ -45,32 +41,29 @@ function playRound(e) {
   rounds++;
   if (rounds === 1){
     scores.appendChild(scoreP);
-    scores.appendChild(dbldot);
     scores.appendChild(scoreC);
-    scoreC.textContent = `${scoreComputer}`;
-    scoreP.textContent = `${scorePlayer}`;
+    scoreC.textContent = `Computer: ${scoreComputer}`;
+    scoreP.textContent = `Player: ${scorePlayer}`;
     console.log(str);
-    console.log(rounds);
-  } else if (rounds > 1 && rounds < 5) {
+  } else if (scoreComputer < 5 && scorePlayer < 5) {
+    scoreC.textContent = `Computer: ${scoreComputer}`;
+    scoreP.textContent = `Player: ${scorePlayer}`;
     console.log(str);
-    console.log(rounds);
-    scoreC.textContent = `${scoreComputer}`;
-    scoreP.textContent = `${scorePlayer}`;
   } else {
-    scoreC.textContent = `${scoreComputer}`;
-    scoreP.textContent = `${scorePlayer}`;
-    console.log(`Comp: ${scoreComputer} Player: ${scorePlayer}`);
+    scoreC.textContent = `Computer: ${scoreComputer}`;
+    scoreP.textContent = `Player: ${scorePlayer}`;
+    console.log(str);
     if (scoreComputer > scorePlayer) {
       resText = 'Computer won!';
     } else if (scorePlayer > scoreComputer) {
       resText = 'You won!';
     } else {
       resText = 'Friendship won!';
-    }
+    };
     resScore.textContent = `${resText}`;
     result.appendChild(resScore); 
-    scorePlayer = 0,
-    scoreComputer = 0,
+    scorePlayer = 0;
+    scoreComputer = 0;
     rounds = 0;
   };
 };
