@@ -4,9 +4,9 @@ let str = '',
     rounds = 0;
 const scores = document.querySelector('#scores');
 const scoreC = document.createElement('div');
-scoreC.classList.add('scoreComputer');
+scoreC.classList.add('scoreComputer', 'score');
 const scoreP = document.createElement('div');
-scoreP.classList.add('scorePlayer');
+scoreP.classList.add('scorePlayer', 'score');
 scoreC.textContent = `Computer: ${scoreComputer}`;
 scoreP.textContent = `Player: ${scorePlayer}`;
 const result = document.querySelector('#result');
